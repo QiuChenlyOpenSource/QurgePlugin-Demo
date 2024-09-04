@@ -1,0 +1,13 @@
+### GET
+GET http://127.0.0.1:8080/demo/123
+    ?generated-in=CLion
+
+### POST
+POST http://127.0.0.1:8080/demo/123?generated-in=CLion
+Content-Type: application/json
+
+{
+  "code": 123
+}
+
+###
