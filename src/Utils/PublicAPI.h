@@ -2,6 +2,7 @@
 #define PublicAPIHeader
 
 #include <Foundation/Foundation.h>
+#include "AppKit/AppKit.h"
 
 using namespace std;
 
@@ -78,18 +79,29 @@ typedef struct PluginInfo {
      * 插件类型
      */
     NSString *type;
+
+    /**
+     * 打开窗口函数
+     * @param window 初始化好的一个window对象 直接获取contentView向内部增加控件即可
+     */
+    void (*OpenWindow)(NSWindow *window);
+    /**
+     * 插件加载事件
+     */
+    void (*onLoad) (API *api);
+    /**
+     * 插件卸载事件
+     * @return 插件退出返回值
+     */
+    int (*onUnload)();
 } PluginInfo;
 
 extern "C" {
-/**
- * 插件加载事件
- */
-OpenAPI PluginInfo *onLoad(API *api);
-/**
- * 插件卸载事件
- * @return 插件退出返回值
- */
-OpenAPI int onUnload();
+    /**
+     * 加载插件信息
+     * @return
+     */
+    OpenAPI PluginInfo* getPluginInfo();
 }
 
 #endif /* PublicAPIHeader */

@@ -220,19 +220,13 @@ void handleSubStore() {
     mainAPI->backend->registerURL(@"/sub-store/cvt", @"GET", parseCvt);
 }
 
+void OpenWindow(NSWindow* window){
+    NSLog(@"OpenWindow");
+}
 
-PluginInfo *onLoad(API *api) {
+void onLoad(API *api) {
     NSLog(@"===== loadPlugins ====");
-    auto *info = new PluginInfo();
-    info->version = 1;
-    info->pluginId = @"com.qiuchenly.demo.plugin";
-    info->name = @"Demo Plugin";
-    info->author = @"QiuChenly";
-    info->type = @"系统增强";
 
-    // 设置插件数据隔离 避免其他插件访问到本插件的数据 必须要设置 否则我会让你强制崩溃
-    api->namespaceId = info->pluginId;
-    // END
     mainAPI = api;
 
     api->backend->registerURL(@"/demo/", @"GET", getDemoHome);
@@ -259,10 +253,22 @@ PluginInfo *onLoad(API *api) {
     auto isFirstOpen = api->storage->getStringByKey(mainAPI, @"isFirstOpen");
     NSLog(@"is First = %@", isFirstOpen);
     api->storage->setStringByKey(mainAPI, @"isFirstOpen", @"false");
-    return info;
 }
 
 int onUnload() {
     NSLog(@"====== unloadPlugins ====");
     return 0;
+}
+
+PluginInfo *getPluginInfo() {
+    auto *info = new PluginInfo();
+    info->version = 1;
+    info->pluginId = @"com.qiuchenly.demo.plugin";
+    info->name = @"Demo Plugin";
+    info->author = @"QiuChenly";
+    info->type = @"系统增强";
+    info->OpenWindow = OpenWindow;
+    info->onLoad = onLoad;
+    info->onUnload = onUnload;
+    return info;
 }
