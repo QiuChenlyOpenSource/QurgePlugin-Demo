@@ -82,7 +82,9 @@ typedef struct PluginInfo {
 
     /**
      * 打开窗口函数
-     * @param window 初始化好的一个window对象 直接获取contentView向内部增加控件即可
+     * 如果你这个插件不需要原生UI窗口，直接这个结构体的值赋值为nullptr，这样在插件中心就会显示灰色的打开窗口按钮(不可点击)
+     * 如果需要窗口，那么就需要指定一个函数接收事件
+     * @param window 初始化好的一个window对象 直接获取contentView向内部增加控件即可 [目前是nullptr 还没做好这个]
      */
     void (*OpenWindow)(NSWindow *window);
     /**

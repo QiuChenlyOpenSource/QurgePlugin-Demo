@@ -267,7 +267,19 @@ PluginInfo *getPluginInfo() {
     info->name = @"Demo Plugin";
     info->author = @"QiuChenly";
     info->type = @"系统增强";
+
+    // ===============
+
+    // 如果你觉得你不需要窗口 那么就直接设置为nullptr
+    info->OpenWindow = nullptr;
+
+    // ==== 二选一 ====
+
+    // 如果你觉得你需要一个窗口 那么就需要指定一个函数接收事件
     info->OpenWindow = OpenWindow;
+
+    // ===============
+
     info->onLoad = onLoad;
     info->onUnload = onUnload;
     return info;
