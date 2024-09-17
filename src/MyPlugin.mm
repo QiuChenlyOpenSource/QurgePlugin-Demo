@@ -267,6 +267,7 @@ PluginInfo *getPluginInfo() {
     info->name = @"Demo Plugin";
     info->author = @"QiuChenly";
     info->type = @"系统增强";
+    info->minOS = 11;
 
     // ===============
 

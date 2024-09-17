@@ -81,6 +81,13 @@ typedef struct PluginInfo {
     NSString *type;
 
     /**
+     * 最低系统版本要求
+     * 可选值 10.15,11,12,13,14,15
+     * 对应系统版本 Catalina，Big Sur，Monterey，Ventura，Sonoma, Sequoia
+     */
+    int minOS = 10;
+
+    /**
      * 打开窗口函数
      * 如果你这个插件不需要原生UI窗口，直接这个结构体的值赋值为nullptr，这样在插件中心就会显示灰色的打开窗口按钮(不可点击)
      * 如果需要窗口，那么就需要指定一个函数接收事件
